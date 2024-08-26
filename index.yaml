@@ -8,7 +8,7 @@ entries:
     digest: sha256:547fcc9c0427c4199df6ea603b1fef07dfbbbe86ac8ee26e2b84dd9d52a42a63
     name: spring-boot-api
     urls:
-    - https://github.com/amydlarz/helm-charts/charts/spring-boot-api-1.0.0.tgz
+    - https://github.com/amydlarz/helm-charts/raw/main/charts/spring-boot-api-0.1.0.tgz
     version: 1.0.0
     sources:
     - https://github.com/amydlarz/helm-charts
