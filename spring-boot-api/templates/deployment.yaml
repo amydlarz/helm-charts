@@ -55,7 +55,7 @@ spec:
             memory: {{ .Values.resources.requests.memory }}
         volumeMounts:
         - name: config-volume
-          mountPath: /etc/config/config.json
+          mountPath: /app/config.json
           subPath: config.json
         lifecycle:
           preStop:
