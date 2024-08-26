@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "spring-boot-api.fullname" . }}-deployment
+  labels:
+    app: {{ include "spring-boot-api.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "spring-boot-api.name" . }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: {{ include "spring-boot-api.name" . }}
+      annotations:
+        checksum/config: {{ index .Values.configMap "config.json" | sha256sum }}
+    spec:
+      containers:
+      - name: spring-boot-api
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+          - containerPort: 8080
+          - containerPort: 8081
+          - containerPort: 8082
+        env:
+          - name: POD_IP # TODO: check on pod
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        resources:
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config/config.json
+          subPath: config.json
+        lifecycle:
+          preStop:
+            exec:
+              command: ["wget", "http://localhost:8080/service/shutdown"]
+      volumes:
+      - name: config-volume
+        configMap:
+          name: {{ include "spring-boot-api.fullname" . }}-config
