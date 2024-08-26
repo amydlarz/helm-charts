@@ -1,5 +1,8 @@
 replicaCount: 3
 
+spring:
+  profile: dev
+
 image:
   repository: busybox
   tag: stable

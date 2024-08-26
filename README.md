@@ -29,7 +29,9 @@ helm repo update
 
 ### 3. Install a Chart
 Install the Helm chart you want to use. For example, to install the spring-boot-api chart:
+```bash
 helm install spring-boot-api amydlarz-helm-repo/spring-boot-api
+```
 
 ### 4. Upgrade a Release
 If you need to upgrade an existing release:
