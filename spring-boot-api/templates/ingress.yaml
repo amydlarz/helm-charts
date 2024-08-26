@@ -7,17 +7,27 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   rules:
-  {{- range .Values.ingress.hosts }}
-    - host: {{ .host }}
-      http:
-        paths:
-        {{- range .paths }}
-          - path: {{ .path }}
-            pathType: {{ .pathType }}
-            backend:
-              service:
-                name: {{ include "spring-boot-api.fullname" $ }}-service
-                port:
-                  number: {{ .port }}
-        {{- end }}
-  {{- end }}
+  - host: {{ .Values.ingress.subdomain }}.{{.Values.ingress.domain}}
+    http:
+      paths:
+        - path: /api
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ include "spring-boot-api.fullname" . }}-service
+              port:
+                number: 8080
+        - path: /logs
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ include "spring-boot-api.fullname" . }}-service
+              port:
+                number: 8081
+        - path: /soap
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ include "spring-boot-api.fullname" . }}-service
+              port:
+                number: 8082

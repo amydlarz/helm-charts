@@ -24,18 +24,8 @@ service:
 ingress:
   enabled: true
   annotations: {}
-  hosts:
-    - host: spring-boot-api.local
-      paths:
-        - path: /api
-          pathType: Prefix
-          port: 8080
-        - path: /logs
-          pathType: Prefix
-          port: 8081
-        - path: /soap
-          pathType: Prefix
-          port: 8082
+  subdomain: dev
+  domain: example.com
   tls: []
 
 resources:
