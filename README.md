@@ -17,7 +17,8 @@ To use the charts in this repository, follow these steps:
 Add this repository to your local Helm configuration:
 
 ```bash
-helm repo add amydlarz-helm-repo https://github.com/amydlarz/helm-charts/charts
+helm repo add amydlarz-helm-repo https://raw.githubusercontent.com/amydlarz/helm-charts/main
+
 ```
 
 ### 2. Update Your Helm Repositories
