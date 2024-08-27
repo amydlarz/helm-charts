@@ -5,7 +5,7 @@ entries:
     appVersion: "1.0.0"
     created: "2024-08-26T12:00:00Z"
     description: A Helm chart for deploying a Spring Boot API application.
-    digest: sha256:547fcc9c0427c4199df6ea603b1fef07dfbbbe86ac8ee26e2b84dd9d52a42a63
+    digest: sha256:53da34039c57ba85918be04fd1388abb9777a85068ce744643b564b6a117227c
     name: spring-boot-api
     urls:
     - https://github.com/amydlarz/helm-charts/raw/main/charts/spring-boot-api-0.1.0.tgz
